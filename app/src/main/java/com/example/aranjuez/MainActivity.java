@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Activar y desactivar opciones
+        Menu menuNav=navigationView.getMenu();
+        MenuItem nav_camara = menuNav.findItem(R.id.nav_camera);
+        nav_camara.setEnabled(false);
     }
 
     @Override
