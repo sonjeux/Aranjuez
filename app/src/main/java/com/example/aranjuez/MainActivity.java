@@ -14,6 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.aranjuez.entidades.Producto;
+import com.example.aranjuez.interfaz.AranjuezJsonApi;
+
+import java.util.List;
+
+import retrofit2.Call;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,7 +53,16 @@ public class MainActivity extends AppCompatActivity
         Menu menuNav=navigationView.getMenu();
         MenuItem nav_camara = menuNav.findItem(R.id.nav_camera);
         nav_camara.setEnabled(false);
+
+        Json.ConfiguracionJson();
+        Json.GetProductos();
     }
+
+    public void Json(){
+        Json.ConfiguracionJson();
+    }
+
+
 
     @Override
     public void onBackPressed() {
