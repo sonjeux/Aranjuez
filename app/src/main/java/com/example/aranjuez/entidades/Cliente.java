@@ -2,48 +2,28 @@ package com.example.aranjuez.entidades;
 
 public class Cliente {
     private String Id;
-    private String Id_Supervisor;
+    private String Id_Desarrollador;
+    private String Id_Preventista;
     private String Id_Distribuidor;
     private String Id_Isscom;
     private String Id_Nivel_Socioeconomico;
     private String Id_Lista_De_Precios;
-    private String Codigo;
+    private String Generico;
     private String Codigo_SAP;
+    private String Codigo_Ruta;
     private String Nombre;
-    private String Direccion;
-    private String Numero_De_Casa;
-    private String Referencias;
-    private String Telefono;
-    private String Celular;
     private String CI_O_NIT;
     private String Razon_Social;
+    private String Nombre_De_Referencia;
+    private String Direccion;
+    private String Referencia;
+    private String Zona;
+    private String Telefono;
+    private String Celular;
     private String Preventa;
     private String Latitud;
     private String Longitud;
     private String Estado;
-
-    public Cliente(String id, String id_Supervisor, String id_Distribuidor, String id_Isscom, String id_Nivel_Socioeconomico, String id_Lista_De_Precios, String codigo, String codigo_SAP, String nombre, String direccion, String numero_De_Casa, String referencias, String telefono, String celular, String CI_O_NIT, String razon_Social, String preventa, String latitud, String longitud, String estado) {
-        Id = id;
-        Id_Supervisor = id_Supervisor;
-        Id_Distribuidor = id_Distribuidor;
-        Id_Isscom = id_Isscom;
-        Id_Nivel_Socioeconomico = id_Nivel_Socioeconomico;
-        Id_Lista_De_Precios = id_Lista_De_Precios;
-        Codigo = codigo;
-        Codigo_SAP = codigo_SAP;
-        Nombre = nombre;
-        Direccion = direccion;
-        Numero_De_Casa = numero_De_Casa;
-        Referencias = referencias;
-        Telefono = telefono;
-        Celular = celular;
-        this.CI_O_NIT = CI_O_NIT;
-        Razon_Social = razon_Social;
-        Preventa = preventa;
-        Latitud = latitud;
-        Longitud = longitud;
-        Estado = estado;
-    }
 
     public String getId() {
         return Id;
@@ -53,12 +33,20 @@ public class Cliente {
         Id = id;
     }
 
-    public String getId_Supervisor() {
-        return Id_Supervisor;
+    public String getId_Desarrollador() {
+        return Id_Desarrollador;
     }
 
-    public void setId_Supervisor(String id_Supervisor) {
-        Id_Supervisor = id_Supervisor;
+    public void setId_Desarrollador(String id_Desarrollador) {
+        Id_Desarrollador = id_Desarrollador;
+    }
+
+    public String getId_Preventista() {
+        return Id_Preventista;
+    }
+
+    public void setId_Preventista(String id_Preventista) {
+        Id_Preventista = id_Preventista;
     }
 
     public String getId_Distribuidor() {
@@ -93,12 +81,12 @@ public class Cliente {
         Id_Lista_De_Precios = id_Lista_De_Precios;
     }
 
-    public String getCodigo() {
-        return Codigo;
+    public String getGenerico() {
+        return Generico;
     }
 
-    public void setCodigo(String codigo) {
-        Codigo = codigo;
+    public void setGenerico(String generico) {
+        Generico = generico;
     }
 
     public String getCodigo_SAP() {
@@ -109,52 +97,20 @@ public class Cliente {
         Codigo_SAP = codigo_SAP;
     }
 
+    public String getCodigo_Ruta() {
+        return Codigo_Ruta;
+    }
+
+    public void setCodigo_Ruta(String codigo_Ruta) {
+        Codigo_Ruta = codigo_Ruta;
+    }
+
     public String getNombre() {
         return Nombre;
     }
 
     public void setNombre(String nombre) {
         Nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return Direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        Direccion = direccion;
-    }
-
-    public String getNumero_De_Casa() {
-        return Numero_De_Casa;
-    }
-
-    public void setNumero_De_Casa(String numero_De_Casa) {
-        Numero_De_Casa = numero_De_Casa;
-    }
-
-    public String getReferencias() {
-        return Referencias;
-    }
-
-    public void setReferencias(String referencias) {
-        Referencias = referencias;
-    }
-
-    public String getTelefono() {
-        return Telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        Telefono = telefono;
-    }
-
-    public String getCelular() {
-        return Celular;
-    }
-
-    public void setCelular(String celular) {
-        Celular = celular;
     }
 
     public String getCI_O_NIT() {
@@ -171,6 +127,54 @@ public class Cliente {
 
     public void setRazon_Social(String razon_Social) {
         Razon_Social = razon_Social;
+    }
+
+    public String getNombre_De_Referencia() {
+        return Nombre_De_Referencia;
+    }
+
+    public void setNombre_De_Referencia(String nombre_De_Referencia) {
+        Nombre_De_Referencia = nombre_De_Referencia;
+    }
+
+    public String getDireccion() {
+        return Direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        Direccion = direccion;
+    }
+
+    public String getReferencia() {
+        return Referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        Referencia = referencia;
+    }
+
+    public String getZona() {
+        return Zona;
+    }
+
+    public void setZona(String zona) {
+        Zona = zona;
+    }
+
+    public String getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        Telefono = telefono;
+    }
+
+    public String getCelular() {
+        return Celular;
+    }
+
+    public void setCelular(String celular) {
+        Celular = celular;
     }
 
     public String getPreventa() {
@@ -202,6 +206,32 @@ public class Cliente {
     }
 
     public void setEstado(String estado) {
+        Estado = estado;
+    }
+
+    public Cliente(String id, String id_Desarrollador, String id_Preventista, String id_Distribuidor, String id_Isscom, String id_Nivel_Socioeconomico, String id_Lista_De_Precios, String generico, String codigo_SAP, String codigo_Ruta, String nombre, String CI_O_NIT, String razon_Social, String nombre_De_Referencia, String direccion, String referencia, String zona, String telefono, String celular, String preventa, String latitud, String longitud, String estado) {
+        Id = id;
+        Id_Desarrollador = id_Desarrollador;
+        Id_Preventista = id_Preventista;
+        Id_Distribuidor = id_Distribuidor;
+        Id_Isscom = id_Isscom;
+        Id_Nivel_Socioeconomico = id_Nivel_Socioeconomico;
+        Id_Lista_De_Precios = id_Lista_De_Precios;
+        Generico = generico;
+        Codigo_SAP = codigo_SAP;
+        Codigo_Ruta = codigo_Ruta;
+        Nombre = nombre;
+        this.CI_O_NIT = CI_O_NIT;
+        Razon_Social = razon_Social;
+        Nombre_De_Referencia = nombre_De_Referencia;
+        Direccion = direccion;
+        Referencia = referencia;
+        Zona = zona;
+        Telefono = telefono;
+        Celular = celular;
+        Preventa = preventa;
+        Latitud = latitud;
+        Longitud = longitud;
         Estado = estado;
     }
 }

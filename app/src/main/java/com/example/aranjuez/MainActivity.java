@@ -1,6 +1,7 @@
 package com.example.aranjuez;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity
         MenuItem nav_camara = menuNav.findItem(R.id.nav_camera);
         nav_camara.setEnabled(false);
 
+        SQLiteHelper sqLiteHelper=new SQLiteHelper(this, "aranjuez", null,1);
+
         Json.ConfiguracionJson();
         Json.GetProductos();
     }
@@ -103,8 +106,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Intent intent;
         switch (item.getItemId()) {
-            case R.id.configuracion:
+            case R.id.nav_Configuracion:
                 intent=new Intent(getApplicationContext(), configuracion.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_Importar:
+                intent=new Intent(getApplicationContext(), JsonActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -112,16 +119,12 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             intent=new Intent(getApplicationContext(), configuracion.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_Preventas) {
+            intent=new Intent(getApplicationContext(), PreventaListadoActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_Productos) {
+            intent=new Intent(getApplicationContext(), ProductoListadoActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

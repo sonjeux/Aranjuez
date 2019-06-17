@@ -15,11 +15,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(consultasSQLite.SQLProducto);
+        db.execSQL(consultasSQLite.SQLLista_De_Precios);
+        db.execSQL(consultasSQLite.SQLPrecio_De_Producto);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Producto");
+        db.execSQL("DROP TABLE IF EXISTS Lista_De_Precios");
+        db.execSQL("DROP TABLE IF EXISTS Precio_De_Producto");
         onCreate(db);
     }
 }

@@ -9,33 +9,12 @@ public class Detalle_De_Preventa {
     private String Total;
     private String Precio_Unitario_Menos_ICE;
     private String Total_Menos_ICE;
-    private String Descuento_Sobre_Venta;
-    private String Porcentaje_De_Descuento_Sobre_Venta;
-    private String Descuento_De_Envases;
+    private String Descuento;
     private String Porcentaje_De_Descuento;
     private String IVA;
     private String ICE;
     private String Litros;
     private String Estado;
-
-    public Detalle_De_Preventa(String id, String id_Preventa, String id_Producto, String cantidad, String precio_Unitario, String total, String precio_Unitario_Menos_ICE, String total_Menos_ICE, String descuento_Sobre_Venta, String porcentaje_De_Descuento_Sobre_Venta, String descuento_De_Envases, String porcentaje_De_Descuento, String IVA, String ICE, String litros, String estado) {
-        Id = id;
-        Id_Preventa = id_Preventa;
-        Id_Producto = id_Producto;
-        Cantidad = cantidad;
-        Precio_Unitario = precio_Unitario;
-        Total = total;
-        Precio_Unitario_Menos_ICE = precio_Unitario_Menos_ICE;
-        Total_Menos_ICE = total_Menos_ICE;
-        Descuento_Sobre_Venta = descuento_Sobre_Venta;
-        Porcentaje_De_Descuento_Sobre_Venta = porcentaje_De_Descuento_Sobre_Venta;
-        Descuento_De_Envases = descuento_De_Envases;
-        Porcentaje_De_Descuento = porcentaje_De_Descuento;
-        this.IVA = IVA;
-        this.ICE = ICE;
-        Litros = litros;
-        Estado = estado;
-    }
 
     public String getId() {
         return Id;
@@ -101,28 +80,12 @@ public class Detalle_De_Preventa {
         Total_Menos_ICE = total_Menos_ICE;
     }
 
-    public String getDescuento_Sobre_Venta() {
-        return Descuento_Sobre_Venta;
+    public String getDescuento() {
+        return Descuento;
     }
 
-    public void setDescuento_Sobre_Venta(String descuento_Sobre_Venta) {
-        Descuento_Sobre_Venta = descuento_Sobre_Venta;
-    }
-
-    public String getPorcentaje_De_Descuento_Sobre_Venta() {
-        return Porcentaje_De_Descuento_Sobre_Venta;
-    }
-
-    public void setPorcentaje_De_Descuento_Sobre_Venta(String porcentaje_De_Descuento_Sobre_Venta) {
-        Porcentaje_De_Descuento_Sobre_Venta = porcentaje_De_Descuento_Sobre_Venta;
-    }
-
-    public String getDescuento_De_Envases() {
-        return Descuento_De_Envases;
-    }
-
-    public void setDescuento_De_Envases(String descuento_De_Envases) {
-        Descuento_De_Envases = descuento_De_Envases;
+    public void setDescuento(String descuento) {
+        Descuento = descuento;
     }
 
     public String getPorcentaje_De_Descuento() {
@@ -162,6 +125,23 @@ public class Detalle_De_Preventa {
     }
 
     public void setEstado(String estado) {
+        Estado = estado;
+    }
+
+    public Detalle_De_Preventa(String id, String id_Preventa, String id_Producto, String cantidad, String precio_Unitario, String total, String precio_Unitario_Menos_ICE, String total_Menos_ICE, String descuento, String porcentaje_De_Descuento, String IVA, String ICE, String litros, String estado) {
+        Id = id;
+        Id_Preventa = id_Preventa;
+        Id_Producto = id_Producto;
+        Cantidad = cantidad;
+        Precio_Unitario = precio_Unitario;
+        Total = total;
+        Precio_Unitario_Menos_ICE = precio_Unitario_Menos_ICE;
+        Total_Menos_ICE = total_Menos_ICE;
+        Descuento = descuento;
+        Porcentaje_De_Descuento = porcentaje_De_Descuento;
+        this.IVA = IVA;
+        this.ICE = ICE;
+        Litros = litros;
         Estado = estado;
     }
 }

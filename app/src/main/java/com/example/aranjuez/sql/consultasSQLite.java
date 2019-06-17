@@ -106,7 +106,7 @@ public class consultasSQLite {
 
     //Parametro
 
-    public static final String SQKPrecio_De_Producto="CREATE TABLE Precio_De_Producto (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id INTEGER, Id_Lista_De_Precios INTEGER, Id_Producto INTEGER, " +
+    public static final String SQLPrecio_De_Producto="CREATE TABLE Precio_De_Producto (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id INTEGER, Id_Lista_De_Precios INTEGER, Id_Producto INTEGER, " +
             "Id_Unidad_De_Medida INTEGER, Precio NUMERIC, Porcentaje_De_Descuento NUMERIC, Estado TEXT)";
 
     public static final String SQLPreventa="CREATE TABLE Preventa (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id INTEGER, Id_Usuario INTEGER, Id_Dispositivo INTEGER, Id_Preventa_Dispositivo INTEGER, " +
