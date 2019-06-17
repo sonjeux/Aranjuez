@@ -1,5 +1,7 @@
 package com.example.aranjuez;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.aranjuez.entidades.Producto;
+import com.example.aranjuez.interfaz.AranjuezJsonApi;
+
+import java.util.List;
+
+import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,7 +49,23 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Activar y desactivar opciones
+        Menu menuNav=navigationView.getMenu();
+        MenuItem nav_camara = menuNav.findItem(R.id.nav_camera);
+        nav_camara.setEnabled(false);
+
+        SQLiteHelper sqLiteHelper=new SQLiteHelper(this, "aranjuez", null,1);
+
+        Json.ConfiguracionJson();
+        Json.GetProductos();
     }
+
+    public void Json(){
+        Json.ConfiguracionJson();
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -79,19 +104,27 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.nav_Configuracion:
+                intent=new Intent(getApplicationContext(), configuracion.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_Importar:
+                intent=new Intent(getApplicationContext(), JsonActivity.class);
+                startActivity(intent);
+                break;
+        }
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            intent=new Intent(getApplicationContext(), configuracion.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_Preventas) {
+            intent=new Intent(getApplicationContext(), PreventaListadoActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_Productos) {
+            intent=new Intent(getApplicationContext(), ProductoListadoActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
