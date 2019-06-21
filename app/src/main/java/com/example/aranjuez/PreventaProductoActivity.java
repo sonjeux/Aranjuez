@@ -7,17 +7,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.support.v7.widget.SearchView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.aranjuez.entidades.ProductoVO;
 
 import java.util.ArrayList;
 
-public class ProductoListadoActivity extends AppCompatActivity {
+public class PreventaProductoActivity extends AppCompatActivity {
     ArrayList<ProductoVO> productos;
     RecyclerView recyclerView;
     SQLiteHelper sqLiteHelper;
@@ -26,42 +23,39 @@ public class ProductoListadoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_producto_listado);
+        setContentView(R.layout.activity_preventa_producto);
+
+        getSupportActionBar().setTitle("Seleccione un Producto");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         sqLiteHelper=new SQLiteHelper(this, "aranjuez", null,1);
 
         productos=new ArrayList<>();
-        recyclerView=findViewById(R.id.RecyclerProductos);
+        recyclerView=findViewById(R.id.RecyclerPreventaProductos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ProductosCargar();
 
-        productoAdapter=new ProductoAdapter(productos);
-        recyclerView.setAdapter(productoAdapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.buscar_producto, menu);
-
-        MenuItem buscar=menu.findItem(R.id.buscarProducto);
-        SearchView searchView=(SearchView) buscar.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        /*  clienteAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void onClick(View v) {
+                String Id_Cliente=clientes.get(recyclerView.getChildAdapterPosition(v)).getId();
+                Intent intent=new Intent(getApplicationContext(), PreventaActivity.class);
+                intent.putExtra("idCliente", Id_Cliente);
+                startActivity(intent);
             }
+        });*/
 
+        productoAdapter=new ProductoAdapter(productos);
+        productoAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextChange(String newText) {
-                productoAdapter.getFilter().filter(newText);
-                return true;
+            public void onClick(View v) {
+                String Id_Producto=productos.get(recyclerView.getChildAdapterPosition(v)).getId();
+                Toast.makeText(getApplicationContext(), Id_Producto, Toast.LENGTH_SHORT).show();
             }
         });
 
-        return super.onCreateOptionsMenu(menu);
+        recyclerView.setAdapter(productoAdapter);
     }
 
     private void ProductosCargar() {
@@ -71,14 +65,9 @@ public class ProductoListadoActivity extends AppCompatActivity {
             Cursor cursor=db.rawQuery("select * from Producto", null);
             cursor.moveToFirst();
             while ( !cursor.isAfterLast()) {
-                //SQLProducto="CREATE TABLE Producto (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id INTEGER, Id_Grupo INTEGER, Id_Gasto_Adicional INTEGER, Id_Grupo_De_Unidad_De_Medida INTEGER, " +
-                //            "Codigo_SAP TEXT, Nombre TEXT, Descripcion TEXT, Alias TEXT, Centro_De_Costo TEXT, Producto_Terminado TEXT, Capacidad_En_Litros NUMERIC, Estado TEXT)";
                 productos.add(new ProductoVO(cursor.getString(cursor.getColumnIndex("Id")), cursor.getString(cursor.getColumnIndex("Codigo_SAP")),
                         cursor.getString(cursor.getColumnIndex("Codigo_SAP")), cursor.getString(cursor.getColumnIndex("Descripcion")),
                         cursor.getString(cursor.getColumnIndex("Capacidad_En_Litros")), cursor.getString(cursor.getColumnIndex("Capacidad_En_Litros"))));
-
-                Log.d("DB", cursor.getString(cursor.getColumnIndex("Descripcion"))+" "+cursor.getString(cursor.getColumnIndex("Codigo_SAP"))+" "+
-                        cursor.getString(cursor.getColumnIndex("Capacidad_En_Litros")));
                 cursor.moveToNext();
             }
             db.close();

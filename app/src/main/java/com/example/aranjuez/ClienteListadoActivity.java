@@ -1,11 +1,14 @@
 package com.example.aranjuez;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -75,9 +78,22 @@ public class ClienteListadoActivity extends AppCompatActivity {
     }
 
     private void ClientesCargar() {
-        clientes.add(new ClienteVO("1", "5120", "Julio Cesar Beizaga Orozco", "5039296011", "Itasur Servicios Integrados", "Av. Heroes del Chaco", "46663341", "70224637", "Activo"));
-        clientes.add(new ClienteVO("2", "5120", "Juan Pablo Beizaga Orozco", "5039296011", "Itasur Servicios Integrados", "Av. Heroes del Chaco", "46663341", "70224637", "Activo"));
-        clientes.add(new ClienteVO("3", "5120", "Victor Hugo Beizaga Orozco", "5039296011", "Itasur Servicios Integrados", "Av. Heroes del Chaco", "46663341", "70224637", "Activo"));
-        clientes.add(new ClienteVO("4", "5120", "Isabel Orozco de Beizaga", "5039296011", "Itasur Servicios Integrados", "Av. Heroes del Chaco", "46663341", "70224637", "Activo"));
+        SQLiteDatabase db=sqLiteHelper.getReadableDatabase();
+        try{
+            Cursor cursor=db.rawQuery("select * from Cliente", null);
+            cursor.moveToFirst();
+            while ( !cursor.isAfterLast()) {
+                clientes.add(new ClienteVO(cursor.getString(cursor.getColumnIndex("Id")), cursor.getString(cursor.getColumnIndex("Codigo_SAP")),
+                        cursor.getString(cursor.getColumnIndex("Nombre")), cursor.getString(cursor.getColumnIndex("CI_O_NIT")),
+                        cursor.getString(cursor.getColumnIndex("Razon_Social")), cursor.getString(cursor.getColumnIndex("Direccion")),
+                        cursor.getString(cursor.getColumnIndex("Telefono")), cursor.getString(cursor.getColumnIndex("Celular")),
+                        cursor.getString(cursor.getColumnIndex("Estado"))));
+                //Log.d("Cliente", cursor.getString(cursor.getColumnIndex("Nombre")));
+                cursor.moveToNext();
+            }
+
+        }catch (Exception e){
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        }
     }
 }

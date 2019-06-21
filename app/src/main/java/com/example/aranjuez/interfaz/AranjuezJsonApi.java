@@ -1,5 +1,6 @@
 package com.example.aranjuez.interfaz;
 
+import com.example.aranjuez.entidades.Cliente;
 import com.example.aranjuez.entidades.Grupo_De_Unidad_De_Medida;
 import com.example.aranjuez.entidades.Lista_De_Precios;
 import com.example.aranjuez.entidades.Precio_De_Producto;
@@ -23,4 +24,7 @@ public interface AranjuezJsonApi {
 
     @GET("todo.php")
     Call<List<Grupo_De_Unidad_De_Medida>> getGrupo_De_Unidad_De_Medidas(@Query("Tabla") String Tabla);
+
+    @GET("todo.php")
+    Call<List<Cliente>> getClientes(@Query("Tabla") String Tabla);
 }

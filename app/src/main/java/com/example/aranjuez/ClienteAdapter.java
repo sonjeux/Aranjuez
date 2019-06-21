@@ -92,10 +92,10 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
         TextView Nit, CodigoSap, ClienteNombre, Telefono, Celular;;
         public ViewHolderCliente(@NonNull View itemView) {
             super(itemView);
-            Nit=itemView.findViewById(R.id.textVCodigoSap);
-            CodigoSap=itemView.findViewById(R.id.textVCodigoSap);
-            ClienteNombre=itemView.findViewById(R.id.textVProductoNombre);
-            Telefono=itemView.findViewById(R.id.textVPrecioU);
+            Nit=itemView.findViewById(R.id.textVNit);
+            CodigoSap=itemView.findViewById(R.id.textVNit);
+            ClienteNombre=itemView.findViewById(R.id.textVClienteNombre);
+            Telefono=itemView.findViewById(R.id.textVTelefono);
             Celular=itemView.findViewById(R.id.textVCelular);
         }
     }

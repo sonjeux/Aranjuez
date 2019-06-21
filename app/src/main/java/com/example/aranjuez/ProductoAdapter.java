@@ -25,6 +25,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         productosTodos=new ArrayList<>(productos);
     }
 
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
+
     @NonNull
     @Override
     public ViewHolderProductos onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -32,8 +36,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         view.setOnClickListener(this);
         return new ViewHolderProductos((view));
     }
-
-
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderProductos viewHolderProductos, int i) {
@@ -91,10 +93,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         TextView codigoSap, codigoBarras, producto, litros, precio;
         public ViewHolderProductos(@NonNull View itemView) {
             super(itemView);
-            codigoSap=itemView.findViewById(R.id.textVCodigoSap);
+            codigoSap=itemView.findViewById(R.id.textVNit);
             codigoBarras=itemView.findViewById(R.id.textVCodigoBarras);
-            producto=itemView.findViewById(R.id.textVProductoNombre);
-            litros=itemView.findViewById(R.id.textVPrecioU);
+            producto=itemView.findViewById(R.id.textVClienteNombre);
+            litros=itemView.findViewById(R.id.textVTelefono);
             precio=itemView.findViewById(R.id.textVPrecio);
         }
     }

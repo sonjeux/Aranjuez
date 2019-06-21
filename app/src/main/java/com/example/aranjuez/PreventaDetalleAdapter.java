@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.aranjuez.entidades.Detalle_De_PreventaVO;
-import com.example.aranjuez.entidades.Producto;
 
 import java.util.ArrayList;
 
@@ -46,10 +45,10 @@ public class PreventaDetalleAdapter extends RecyclerView.Adapter<PreventaDetalle
         TextView CodigoSap, CodigoBarras, Producto, PrecioU, Cantidad, SubTotal;
         public ViewHolderPreventaDetalle(@NonNull View itemView) {
             super(itemView);
-            CodigoSap=itemView.findViewById(R.id.textVCodigoSap);
+            CodigoSap=itemView.findViewById(R.id.textVNit);
             CodigoBarras=itemView.findViewById(R.id.textVCodigoBarras);
-            Producto=itemView.findViewById(R.id.textVProductoNombre);
-            PrecioU=itemView.findViewById(R.id.textVPrecioU);
+            Producto=itemView.findViewById(R.id.textVClienteNombre);
+            PrecioU=itemView.findViewById(R.id.textVTelefono);
             Cantidad=itemView.findViewById(R.id.textVCantidad);
             SubTotal=itemView.findViewById(R.id.textVSubTotal);
         }

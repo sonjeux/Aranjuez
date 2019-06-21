@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PreventaProductoActivity"
+            android:label="Productos"
+            android:parentActivityName=".PreventaActivity"/>
+        <activity
             android:name=".PreventaActivity"
             android:label="Preventa"
-            android:parentActivityName=".ClienteListadoActivity"></activity>
+            android:parentActivityName=".ClienteListadoActivity" />
         <activity
             android:name=".ClienteListadoActivity"
             android:label="Listado de Clientes"

@@ -43,10 +43,10 @@ public class PreventaAdapter extends RecyclerView.Adapter<PreventaAdapter.ViewHo
         TextView Fecha, Hora, ClienteNombre, Total, Estado;
         public ViewHolderPreventa(@NonNull View itemView) {
             super(itemView);
-            Fecha=itemView.findViewById(R.id.textVCodigoSap);
+            Fecha=itemView.findViewById(R.id.textVNit);
             Hora=itemView.findViewById(R.id.textVHora);
-            ClienteNombre=itemView.findViewById(R.id.textVProductoNombre);
-            Total=itemView.findViewById(R.id.textVPrecioU);
+            ClienteNombre=itemView.findViewById(R.id.textVClienteNombre);
+            Total=itemView.findViewById(R.id.textVTelefono);
             Estado=itemView.findViewById(R.id.textVEstado);
         }
     }
