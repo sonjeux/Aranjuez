@@ -47,6 +47,7 @@ public class ClienteListadoActivity extends AppCompatActivity {
                 String Id_Cliente=clientes.get(recyclerView.getChildAdapterPosition(v)).getId();
                 Intent intent=new Intent(getApplicationContext(), PreventaActivity.class);
                 intent.putExtra("idCliente", Id_Cliente);
+                intent.putExtra("idPreventa", "0");
                 startActivity(intent);
             }
         });

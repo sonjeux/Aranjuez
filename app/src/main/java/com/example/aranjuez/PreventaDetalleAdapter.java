@@ -45,9 +45,9 @@ public class PreventaDetalleAdapter extends RecyclerView.Adapter<PreventaDetalle
         TextView CodigoSap, CodigoBarras, Producto, PrecioU, Cantidad, SubTotal;
         public ViewHolderPreventaDetalle(@NonNull View itemView) {
             super(itemView);
-            CodigoSap=itemView.findViewById(R.id.textVNit);
+            CodigoSap=itemView.findViewById(R.id.textVCodigoSap);
             CodigoBarras=itemView.findViewById(R.id.textVCodigoBarras);
-            Producto=itemView.findViewById(R.id.textVClienteNombre);
+            Producto=itemView.findViewById(R.id.textVProductoNombre);
             PrecioU=itemView.findViewById(R.id.textVTelefono);
             Cantidad=itemView.findViewById(R.id.textVCantidad);
             SubTotal=itemView.findViewById(R.id.textVSubTotal);

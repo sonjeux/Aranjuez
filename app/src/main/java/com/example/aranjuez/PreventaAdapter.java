@@ -11,8 +11,10 @@ import com.example.aranjuez.entidades.PreventaVO;
 
 import java.util.ArrayList;
 
-public class PreventaAdapter extends RecyclerView.Adapter<PreventaAdapter.ViewHolderPreventa> {
+public class PreventaAdapter extends RecyclerView.Adapter<PreventaAdapter.ViewHolderPreventa> implements View.OnClickListener{
     ArrayList<PreventaVO> preventas;
+
+    private View.OnClickListener listener;
 
     public PreventaAdapter(ArrayList<PreventaVO> preventas) {
         this.preventas = preventas;
@@ -22,6 +24,7 @@ public class PreventaAdapter extends RecyclerView.Adapter<PreventaAdapter.ViewHo
     @Override
     public ViewHolderPreventa onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_preventas, null, false);
+        view.setOnClickListener(this);
         return new ViewHolderPreventa(view);
     }
 
@@ -39,13 +42,24 @@ public class PreventaAdapter extends RecyclerView.Adapter<PreventaAdapter.ViewHo
         return preventas.size();
     }
 
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (listener!=null){
+            listener.onClick(v);
+        }
+    }
+
     public class ViewHolderPreventa extends RecyclerView.ViewHolder {
         TextView Fecha, Hora, ClienteNombre, Total, Estado;
         public ViewHolderPreventa(@NonNull View itemView) {
             super(itemView);
-            Fecha=itemView.findViewById(R.id.textVNit);
+            Fecha=itemView.findViewById(R.id.textVCodigoSap);
             Hora=itemView.findViewById(R.id.textVHora);
-            ClienteNombre=itemView.findViewById(R.id.textVClienteNombre);
+            ClienteNombre=itemView.findViewById(R.id.textVProductoNombre);
             Total=itemView.findViewById(R.id.textVTelefono);
             Estado=itemView.findViewById(R.id.textVEstado);
         }

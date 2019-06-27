@@ -1,6 +1,8 @@
 package com.example.aranjuez;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,10 @@ public class PreventaListadoActivity extends AppCompatActivity {
     ArrayList<PreventaVO> preventas;
     RecyclerView recyclerView;
     SQLiteHelper sqLiteHelper;
+    PreventaAdapter preventaAdapter;
+    String Id_Cliente, Id_Preventa;
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,20 +35,40 @@ public class PreventaListadoActivity extends AppCompatActivity {
 
         PreventasCargar();
 
-        PreventaAdapter preventaAdapter=new PreventaAdapter(preventas);
+        preventaAdapter=new PreventaAdapter(preventas);
+        preventaAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Id_Preventa=preventas.get(recyclerView.getChildAdapterPosition(v)).getId();
+                db=sqLiteHelper.getReadableDatabase();
+                Cursor cursor=db.rawQuery("select * from Preventa where _id='"+Id_Preventa+"'", null);
+                cursor.moveToFirst();
+                Id_Cliente=cursor.getString(cursor.getColumnIndex("Id_Cliente"));
+
+                Intent intent=new Intent(getApplicationContext(), PreventaActivity.class);
+                intent.putExtra("idCliente", Id_Cliente);
+                intent.putExtra("idPreventa", Id_Preventa);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(preventaAdapter);
     }
 
     private void PreventasCargar() {
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
-        preventas.add(new PreventaVO("1", "01/02/2019", "16:35", "Julio Cesar Beizaga Orozco", "182.50", "Pendiente"));
+        db=sqLiteHelper.getReadableDatabase();
+        try {
+            Cursor cursor=db.rawQuery("select Preventa.*, (select Cliente.Nombre from Cliente where Cliente.Id=Preventa.Id_Cliente) as ClienteNombte from Preventa order by _id desc", null);
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()){
+                preventas.add(new PreventaVO(cursor.getString(cursor.getColumnIndex("_id")), cursor.getString(cursor.getColumnIndex("Fecha")), cursor.getString(cursor.getColumnIndex("Hora")),
+                        cursor.getString(cursor.getColumnIndex("ClienteNombte")), cursor.getString(cursor.getColumnIndex("Total_A_Pagar")), cursor.getString(cursor.getColumnIndex("Estado"))));
+                cursor.moveToNext();
+            }
+            db.close();
+            cursor.close();
+        }catch ( Exception e){
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void BuscarCliente(View view) {

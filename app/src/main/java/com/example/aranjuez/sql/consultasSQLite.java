@@ -109,9 +109,10 @@ public class consultasSQLite {
     public static final String SQLPrecio_De_Producto="CREATE TABLE Precio_De_Producto (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id INTEGER, Id_Lista_De_Precios INTEGER, Id_Producto INTEGER, " +
             "Id_Unidad_De_Medida INTEGER, Precio NUMERIC, Porcentaje_De_Descuento NUMERIC, Estado TEXT)";
 
-    public static final String SQLPreventa="CREATE TABLE Preventa (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id INTEGER, Id_Usuario INTEGER, Id_Dispositivo INTEGER, Id_Preventa_Dispositivo INTEGER, " +
-            "Id_Cliente INTEGER, Id_Condicion_De_Pago INTEGER, DocEntry TEXT, Codigo_SAP TEXT, Fecha TEXT, Hora TEXT, Latitud NUMERIC, Longitud NUMERIC, Total_De_Litros NUMERIC, Subtotal NUMERIC, " +
-            "Descuento NUMERIC, Monto_Para_Credito_Fiscal NUMERIC, IVA NUMERIC, ICE NUMERIC, Total NUMERIC, Total_A_Pagar NUMERIC, Observaciones TEXT, Estado TEXT, Sincronizada INTEGER)";
+    public static final String SQLPreventa="CREATE TABLE Preventa (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id INTEGER, Id_Usuario INTEGER, Id_Dispositivo INTEGER, Id_Condicion_De_Pago INTEGER, " +
+            "Id_Numeracion_De_Documento INTEGER, Id_Preventista INTEGER, Id_Cliente INTEGER, Id_Preventa_Dispositivo INTEGER, " +
+            "DocEntry TEXT, Codigo_SAP TEXT, Fecha date, Hora TEXT, Latitud NUMERIC, Longitud NUMERIC, Total_De_Litros NUMERIC, Subtotal NUMERIC, Descuento NUMERIC," +
+            "Monto_Para_Credito_Fiscal NUMERIC, IVA NUMERIC, ICE NUMERIC, Total NUMERIC, Total_A_Pagar NUMERIC, Observaciones TEXT, Estado TEXT, Sincronizada bit)";
 
     //Preventista
 

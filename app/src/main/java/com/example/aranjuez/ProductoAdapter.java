@@ -40,10 +40,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolderProductos viewHolderProductos, int i) {
         viewHolderProductos.codigoSap.setText(productos.get(i).getCodigo_SAP());
-        viewHolderProductos.codigoBarras.setText(productos.get(i).getCodigo_SAP());
+        viewHolderProductos.codigoBarras.setText(productos.get(i).getCodigo_Barras());
         viewHolderProductos.producto.setText(productos.get(i).getNombre());
-        viewHolderProductos.litros.setText(productos.get(i).getCodigo_SAP());
-        viewHolderProductos.precio.setText(productos.get(i).getCodigo_SAP());
+        viewHolderProductos.litros.setText(productos.get(i).getCapacidad_En_Litros());
+        viewHolderProductos.precio.setText(productos.get(i).getPrecio());
     }
 
     @Override
@@ -93,9 +93,9 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         TextView codigoSap, codigoBarras, producto, litros, precio;
         public ViewHolderProductos(@NonNull View itemView) {
             super(itemView);
-            codigoSap=itemView.findViewById(R.id.textVNit);
+            codigoSap=itemView.findViewById(R.id.textVCodigoSap);
             codigoBarras=itemView.findViewById(R.id.textVCodigoBarras);
-            producto=itemView.findViewById(R.id.textVClienteNombre);
+            producto=itemView.findViewById(R.id.textVProductoNombre);
             litros=itemView.findViewById(R.id.textVTelefono);
             precio=itemView.findViewById(R.id.textVPrecio);
         }

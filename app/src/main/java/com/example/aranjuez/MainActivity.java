@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         SQLiteHelper sqLiteHelper=new SQLiteHelper(this, "aranjuez", null,1);
 
         Json.ConfiguracionJson();
-        Json.GetProductos();
+        //Json.GetProductos();
     }
 
     public void Json(){

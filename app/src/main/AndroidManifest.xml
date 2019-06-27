@@ -14,7 +14,7 @@
         <activity
             android:name=".PreventaProductoActivity"
             android:label="Productos"
-            android:parentActivityName=".PreventaActivity"/>
+            />
         <activity
             android:name=".PreventaActivity"
             android:label="Preventa"

@@ -4,12 +4,13 @@ public class Preventa {
     private String Id;
     private String Id_Usuario;
     private String Id_Dispositivo;
-    private String Id_Preventa_Dispositivo;
-    private String Id_Cliente;
     private String Id_Condicion_De_Pago;
+    private String Id_Numeracion_De_Documento;
+    private String Id_Preventista;
+    private String Id_Cliente;
+    private String Id_Preventa_Dispositivo;
     private String DocEntry;
     private String Codigo_SAP;
-    private String Numero;
     private String Fecha;
     private String Hora;
     private String Latitud;
@@ -17,8 +18,6 @@ public class Preventa {
     private String Total_De_Litros;
     private String Subtotal;
     private String Descuento;
-    private String Descuento_Sobre_Venta;
-    private String Descuento_De_Envases;
     private String Monto_Para_Credito_Fiscal;
     private String IVA;
     private String ICE;
@@ -27,35 +26,6 @@ public class Preventa {
     private String Observaciones;
     private String Estado;
     private String Sincronizada;
-
-    public Preventa(String id, String id_Usuario, String id_Dispositivo, String id_Preventa_Dispositivo, String id_Cliente, String id_Condicion_De_Pago, String docEntry, String codigo_SAP, String numero, String fecha, String hora, String latitud, String longitud, String total_De_Litros, String subtotal, String descuento, String descuento_Sobre_Venta, String descuento_De_Envases, String monto_Para_Credito_Fiscal, String IVA, String ICE, String total, String total_A_Pagar, String observaciones, String estado, String sincronizada) {
-        Id = id;
-        Id_Usuario = id_Usuario;
-        Id_Dispositivo = id_Dispositivo;
-        Id_Preventa_Dispositivo = id_Preventa_Dispositivo;
-        Id_Cliente = id_Cliente;
-        Id_Condicion_De_Pago = id_Condicion_De_Pago;
-        DocEntry = docEntry;
-        Codigo_SAP = codigo_SAP;
-        Numero = numero;
-        Fecha = fecha;
-        Hora = hora;
-        Latitud = latitud;
-        Longitud = longitud;
-        Total_De_Litros = total_De_Litros;
-        Subtotal = subtotal;
-        Descuento = descuento;
-        Descuento_Sobre_Venta = descuento_Sobre_Venta;
-        Descuento_De_Envases = descuento_De_Envases;
-        Monto_Para_Credito_Fiscal = monto_Para_Credito_Fiscal;
-        this.IVA = IVA;
-        this.ICE = ICE;
-        Total = total;
-        Total_A_Pagar = total_A_Pagar;
-        Observaciones = observaciones;
-        Estado = estado;
-        Sincronizada = sincronizada;
-    }
 
     public String getId() {
         return Id;
@@ -81,12 +51,28 @@ public class Preventa {
         Id_Dispositivo = id_Dispositivo;
     }
 
-    public String getId_Preventa_Dispositivo() {
-        return Id_Preventa_Dispositivo;
+    public String getId_Condicion_De_Pago() {
+        return Id_Condicion_De_Pago;
     }
 
-    public void setId_Preventa_Dispositivo(String id_Preventa_Dispositivo) {
-        Id_Preventa_Dispositivo = id_Preventa_Dispositivo;
+    public void setId_Condicion_De_Pago(String id_Condicion_De_Pago) {
+        Id_Condicion_De_Pago = id_Condicion_De_Pago;
+    }
+
+    public String getId_Numeracion_De_Documento() {
+        return Id_Numeracion_De_Documento;
+    }
+
+    public void setId_Numeracion_De_Documento(String id_Numeracion_De_Documento) {
+        Id_Numeracion_De_Documento = id_Numeracion_De_Documento;
+    }
+
+    public String getId_Preventista() {
+        return Id_Preventista;
+    }
+
+    public void setId_Preventista(String id_Preventista) {
+        Id_Preventista = id_Preventista;
     }
 
     public String getId_Cliente() {
@@ -97,12 +83,12 @@ public class Preventa {
         Id_Cliente = id_Cliente;
     }
 
-    public String getId_Condicion_De_Pago() {
-        return Id_Condicion_De_Pago;
+    public String getId_Preventa_Dispositivo() {
+        return Id_Preventa_Dispositivo;
     }
 
-    public void setId_Condicion_De_Pago(String id_Condicion_De_Pago) {
-        Id_Condicion_De_Pago = id_Condicion_De_Pago;
+    public void setId_Preventa_Dispositivo(String id_Preventa_Dispositivo) {
+        Id_Preventa_Dispositivo = id_Preventa_Dispositivo;
     }
 
     public String getDocEntry() {
@@ -119,14 +105,6 @@ public class Preventa {
 
     public void setCodigo_SAP(String codigo_SAP) {
         Codigo_SAP = codigo_SAP;
-    }
-
-    public String getNumero() {
-        return Numero;
-    }
-
-    public void setNumero(String numero) {
-        Numero = numero;
     }
 
     public String getFecha() {
@@ -183,22 +161,6 @@ public class Preventa {
 
     public void setDescuento(String descuento) {
         Descuento = descuento;
-    }
-
-    public String getDescuento_Sobre_Venta() {
-        return Descuento_Sobre_Venta;
-    }
-
-    public void setDescuento_Sobre_Venta(String descuento_Sobre_Venta) {
-        Descuento_Sobre_Venta = descuento_Sobre_Venta;
-    }
-
-    public String getDescuento_De_Envases() {
-        return Descuento_De_Envases;
-    }
-
-    public void setDescuento_De_Envases(String descuento_De_Envases) {
-        Descuento_De_Envases = descuento_De_Envases;
     }
 
     public String getMonto_Para_Credito_Fiscal() {
@@ -262,6 +224,34 @@ public class Preventa {
     }
 
     public void setSincronizada(String sincronizada) {
+        Sincronizada = sincronizada;
+    }
+
+    public Preventa(String id, String id_Usuario, String id_Dispositivo, String id_Condicion_De_Pago, String id_Numeracion_De_Documento, String id_Preventista, String id_Cliente, String id_Preventa_Dispositivo, String docEntry, String codigo_SAP, String fecha, String hora, String latitud, String longitud, String total_De_Litros, String subtotal, String descuento, String monto_Para_Credito_Fiscal, String IVA, String ICE, String total, String total_A_Pagar, String observaciones, String estado, String sincronizada) {
+        Id = id;
+        Id_Usuario = id_Usuario;
+        Id_Dispositivo = id_Dispositivo;
+        Id_Condicion_De_Pago = id_Condicion_De_Pago;
+        Id_Numeracion_De_Documento = id_Numeracion_De_Documento;
+        Id_Preventista = id_Preventista;
+        Id_Cliente = id_Cliente;
+        Id_Preventa_Dispositivo = id_Preventa_Dispositivo;
+        DocEntry = docEntry;
+        Codigo_SAP = codigo_SAP;
+        Fecha = fecha;
+        Hora = hora;
+        Latitud = latitud;
+        Longitud = longitud;
+        Total_De_Litros = total_De_Litros;
+        Subtotal = subtotal;
+        Descuento = descuento;
+        Monto_Para_Credito_Fiscal = monto_Para_Credito_Fiscal;
+        this.IVA = IVA;
+        this.ICE = ICE;
+        Total = total;
+        Total_A_Pagar = total_A_Pagar;
+        Observaciones = observaciones;
+        Estado = estado;
         Sincronizada = sincronizada;
     }
 }
