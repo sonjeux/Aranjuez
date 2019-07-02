@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -54,6 +56,20 @@ public class PreventaListadoActivity extends AppCompatActivity {
         recyclerView.setAdapter(preventaAdapter);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.buscar_preventas, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void PreventasCargar() {
         db=sqLiteHelper.getReadableDatabase();
         try {
@@ -61,7 +77,7 @@ public class PreventaListadoActivity extends AppCompatActivity {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()){
                 preventas.add(new PreventaVO(cursor.getString(cursor.getColumnIndex("_id")), cursor.getString(cursor.getColumnIndex("Fecha")), cursor.getString(cursor.getColumnIndex("Hora")),
-                        cursor.getString(cursor.getColumnIndex("ClienteNombte")), cursor.getString(cursor.getColumnIndex("Total_A_Pagar")), cursor.getString(cursor.getColumnIndex("Estado"))));
+                        cursor.getString(cursor.getColumnIndex("ClienteNombte")), cursor.getString(cursor.getColumnIndex("Total")), cursor.getString(cursor.getColumnIndex("Estado"))));
                 cursor.moveToNext();
             }
             db.close();

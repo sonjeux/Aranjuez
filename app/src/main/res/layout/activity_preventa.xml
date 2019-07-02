@@ -60,7 +60,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="Celular"
+                    android:text="Estado"
                     android:textColor="#ccc"
                     android:textSize="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="2dp"
-                    android:text="Telefono"
+                    android:text="Total"
                     android:textColor="#ccc"
                     android:textSize="10dp"
                     app:layout_constraintTop_toBottomOf="@+id/textVProductoNombre"
@@ -113,7 +113,7 @@
                     tools:layout_editor_absoluteX="16dp" />
 
                 <TextView
-                    android:id="@+id/textVTelefono"
+                    android:id="@+id/textVTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textView9"
@@ -122,12 +122,12 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="2dp"
-                    android:text="46663341"
+                    android:text="1450"
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
                     tools:layout_editor_absoluteX="16dp" />
 
                 <TextView
-                    android:id="@+id/textVCelular"
+                    android:id="@+id/textVEstado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textView10"
@@ -136,7 +136,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="70224637"
+                    android:text="Pendiente"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -171,7 +171,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_below="@+id/textVTelefono"
+                    android:layout_below="@+id/textVTotal"
                     android:layout_marginTop="16dp"
                     android:background="#E4E4E4" />
 
@@ -194,16 +194,17 @@
             >
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn2_yes"
+                android:id="@+id/BotonFinalizar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:text="Guardar" />
+                android:text="Finalizar"
+                android:onClick="Finalizar"/>
         </LinearLayout>`
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabAgregar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"

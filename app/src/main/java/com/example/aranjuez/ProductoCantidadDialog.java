@@ -21,17 +21,21 @@ public class ProductoCantidadDialog extends AppCompatDialogFragment{
         View view=inflater.inflate(R.layout.dialog_producto_cantidad, null);
 
         Bundle bundle=getArguments();
-        String Producto, Precio;
+        String Producto, Precio, CodigoSap;
         Producto=bundle.getString("Producto", "");
         Precio=bundle.getString("Precio", "");
+        CodigoSap=bundle.getString("CodigoSap", "");
 
-        TextView ProductoNombreT, PrecioT;
+        TextView ProductoNombreT, PrecioT, CodigoSapT;
 
         ProductoNombreT=view.findViewById(R.id.textVProductoNombreD);
         ProductoNombreT.setText(Producto);
 
         PrecioT=view.findViewById(R.id.textVPrecioU);
         PrecioT.setText(Precio);
+
+        CodigoSapT=view.findViewById(R.id.textVCodigoSap);
+        CodigoSapT.setText(CodigoSap);
 
         editTextCantidad=view.findViewById(R.id.editTCantidad);
         editTextDescuento=view.findViewById(R.id.editTDescuento);

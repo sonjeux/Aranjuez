@@ -21,15 +21,15 @@
             android:parentActivityName=".ClienteListadoActivity" />
         <activity
             android:name=".ClienteListadoActivity"
-            android:label="Listado de Clientes"
+            android:label="Clientes"
             android:parentActivityName=".PreventaListadoActivity" />
         <activity
             android:name=".PreventaListadoActivity"
-            android:label="Listado de Preventas"
+            android:label="Preventas"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ProductoListadoActivity"
-            android:label="Listado de Productos"
+            android:label="Productos"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".JsonActivity"

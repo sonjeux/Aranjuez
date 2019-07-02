@@ -7,7 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,15 +51,17 @@ public class PreventaProductoActivity extends AppCompatActivity implements Produ
         productoAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView CodigoSap, NombreProducto, Precio;
                 String Producto=productos.get(recyclerView.getChildAdapterPosition(v)).getNombre();
+                String PrecioU=productos.get(recyclerView.getChildAdapterPosition(v)).getPrecio();
+                String CodigoSap=productos.get(recyclerView.getChildAdapterPosition(v)).getCodigo_SAP();
+
                 Id_Producto=productos.get(recyclerView.getChildAdapterPosition(v)).getId();
-                //Toast.makeText(getApplicationContext(), Producto, Toast.LENGTH_SHORT).show();
 
                 ProductoCantidadDialog productoCantidadDialog=new ProductoCantidadDialog();
                 Bundle bundle=new Bundle();
                 bundle.putString("Producto",Producto);
-                bundle.putString("Precio", "15.25");
+                bundle.putString("Precio", PrecioU);
+                bundle.putString("CodigoSap", CodigoSap);
                 productoCantidadDialog.setArguments(bundle);
 
                 productoCantidadDialog.show(getSupportFragmentManager(), "Producto");
@@ -63,6 +69,30 @@ public class PreventaProductoActivity extends AppCompatActivity implements Produ
         });
 
         recyclerView.setAdapter(productoAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.buscar_preventas_producto, menu);
+
+        MenuItem buscar=menu.findItem(R.id.buscarPreventaProducto);
+        SearchView searchView=(SearchView) buscar.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                productoAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void ProductosCargar() {
@@ -87,12 +117,13 @@ public class PreventaProductoActivity extends AppCompatActivity implements Produ
 
     @Override
     public void aplicarTextos(String cantidad, String descuento) {
-        Double PrecioF, CantidadF, DescuentoPorcentajeF, LitrosF, ICEF;
+        Double PrecioF, CantidadF, DescuentoPorcentajeF, DescuentoF, LitrosF, LitrosTotalF, ICEF, ICETotalF, TotalF, TotalMenosICEF, PrecioUMenosICEF, IVAF;
         db=sqLiteHelper.getReadableDatabase();
 
         ICEF=3.51;
 
         Cursor cursorPrecios=db.rawQuery("select * from Precio_De_Producto where (Id_Lista_De_Precios='"+Id_Lista_De_Precios+"')and(Id_Unidad_De_Medida='"+Id_Unidad_De_Medida+"')and(Id_Producto='"+Id_Producto+"')", null);
+        cursorPrecios.moveToFirst();
         PrecioF=cursorPrecios.getDouble(cursorPrecios.getColumnIndex("Precio"));
         DescuentoPorcentajeF=cursorPrecios.getDouble(cursorPrecios.getColumnIndex("Porcentaje_De_Descuento"));
 
@@ -102,10 +133,19 @@ public class PreventaProductoActivity extends AppCompatActivity implements Produ
         LitrosF=cursor.getDouble(cursor.getColumnIndex("Capacidad_En_Litros"));
         CantidadF=Double.parseDouble(cantidad);
 
+        TotalF=CantidadF*PrecioF;
+        PrecioUMenosICEF=PrecioF-(ICEF*LitrosF);
+        ICETotalF=CantidadF*ICEF*LitrosF;
+        TotalMenosICEF=CantidadF*PrecioUMenosICEF;
+        LitrosTotalF=CantidadF*LitrosF;
+        DescuentoF=(PrecioF*DescuentoPorcentajeF)/100;
+        IVAF=(TotalMenosICEF-ICETotalF)*0.13;
+
         db=sqLiteHelper.getWritableDatabase();
         db.execSQL("insert into Detalle_De_Preventa (Id, Id_Preventa, Id_Producto, Cantidad, Precio_Unitario, Total, Precio_Unitario_Menos_ICE, Total_Menos_ICE, Descuento, " +
-                "Porcentaje_De_Descuento, IVA, ICE, Litros, Estado) values ('0', '"+Id_Preventa+"', '"+Id_Producto+"', '"+cantidad+"', '10', '100', '9', '99', '"+descuento+"', " +
-                "'0', '0', '0', '0', 'Pendiente')");
+                "Porcentaje_De_Descuento, IVA, ICE, Litros, Estado) values ('0', '"+Id_Preventa+"', '"+Id_Producto+"', '"+cantidad+"', '"+Double.toString(PrecioF)+
+                "', '"+Double.toString(TotalF)+"', '"+Double.toString(PrecioUMenosICEF)+"', '"+Double.toString(TotalMenosICEF)+"', '"+Double.toString(DescuentoF)+
+                "', '"+Double.toString(DescuentoPorcentajeF)+"', '"+Double.toString(IVAF)+"', '"+Double.toString(ICETotalF)+"', '"+Double.toString(LitrosTotalF)+"', 'Pendiente')");
         db.close();
         Snackbar.make(getWindow().getDecorView().getRootView(), "Producto agregado", Snackbar.LENGTH_SHORT).show();
     }

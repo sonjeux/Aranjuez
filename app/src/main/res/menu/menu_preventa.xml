@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/botonNota"
+        android:icon="@drawable/ic_speaker_notes_white_24dp"
+        android:title="Nota"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/botonInformacion"
+        android:icon="@drawable/ic_info_outline_white_24dp"
+        android:title="Informacion"
+        app:showAsAction="ifRoom" />
+</menu>
