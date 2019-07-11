@@ -8,8 +8,9 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom" />
     <item
-        android:id="@+id/botonPrueba"
+        android:id="@+id/botonFiltro"
         android:icon="@drawable/ic_filter_list_white_24dp"
-        android:title="Buscar"
-        app:showAsAction="ifRoom" />
+        android:title="Filtro"
+        app:showAsAction="ifRoom"
+        android:onClick="FiltrarPrecios"/>
 </menu>

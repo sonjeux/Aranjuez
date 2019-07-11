@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.aranjuez.entidades.Area;
 import com.example.aranjuez.entidades.Cliente;
 import com.example.aranjuez.entidades.Codigo_De_Barras;
 import com.example.aranjuez.entidades.Detalle_De_Grupo_De_Unidad_De_Medida;
@@ -27,7 +28,9 @@ import com.example.aranjuez.entidades.Unidad_De_Medida_De_Producto;
 import com.example.aranjuez.interfaz.AranjuezJsonApi;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,6 +91,33 @@ public class JsonActivity extends AppCompatActivity {
                 Log.e("LogE","Fallo ");
             }
         });
+    }
+
+    public void PostArea(){
+        Map<String, String> map=new HashMap<>();
+        map.put("Mensaje", "Saludos");
+        map.put("Nombre", "Lola Soledad");
+        Call<Area> call=aranjuezJsonApi.postArea(map);
+        call.enqueue(new Callback<Area>() {
+            @Override
+            public void onResponse(Call<Area> call, Response<Area> response) {
+                if (!response.isSuccessful()){
+                    Log.d("Respuesta","Error "+response.code());
+                    return;
+                }
+                Area area=response.body();
+                Log.d("Respuesta", area.getId());
+            }
+
+            @Override
+            public void onFailure(Call<Area> call, Throwable t) {
+                Log.d("Respuesta","Fallo ");
+            }
+        });
+    }
+
+    public void testPost(View view) {
+        PostArea();
     }
 
     public void GetLista_De_Precios(){
@@ -435,6 +465,8 @@ public class JsonActivity extends AppCompatActivity {
         });
         alertDialog.show();
     }
+
+
 
     private class  TareaAsincrona extends AsyncTask<Void, Integer, Boolean>{
 

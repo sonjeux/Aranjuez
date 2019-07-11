@@ -38,9 +38,8 @@ public class ProductoCantidadDialog extends AppCompatDialogFragment{
         CodigoSapT.setText(CodigoSap);
 
         editTextCantidad=view.findViewById(R.id.editTCantidad);
-        editTextDescuento=view.findViewById(R.id.editTDescuento);
 
-        builder.setView(view).setTitle("Producto").setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("Producto").setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -49,8 +48,7 @@ public class ProductoCantidadDialog extends AppCompatDialogFragment{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String Cantidad=editTextCantidad.getText().toString();
-                String Descuento=editTextDescuento.getText().toString();
-                listener.aplicarTextos(Cantidad, Descuento);
+                listener.aplicarTextos(Cantidad);
             }
         });
 
@@ -69,6 +67,6 @@ public class ProductoCantidadDialog extends AppCompatDialogFragment{
     }
 
     public interface ProductoCantidadDialogListener {
-        void aplicarTextos(String canditdad, String descuento);
+        void aplicarTextos(String canditdad);
     }
 }

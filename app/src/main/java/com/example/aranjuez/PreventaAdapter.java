@@ -5,19 +5,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.aranjuez.entidades.PreventaVO;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class PreventaAdapter extends RecyclerView.Adapter<PreventaAdapter.ViewHolderPreventa> implements View.OnClickListener{
-    ArrayList<PreventaVO> preventas;
+public class PreventaAdapter extends RecyclerView.Adapter<PreventaAdapter.ViewHolderPreventa> implements View.OnClickListener, View.OnLongClickListener, Filterable {
+    ArrayList<PreventaVO> preventas, preventasTodos;
 
     private View.OnClickListener listener;
+    private View.OnLongClickListener onLongClickListener;
 
     public PreventaAdapter(ArrayList<PreventaVO> preventas) {
         this.preventas = preventas;
+        preventasTodos=new ArrayList<>(preventas);
     }
 
     @NonNull
@@ -51,6 +56,42 @@ public class PreventaAdapter extends RecyclerView.Adapter<PreventaAdapter.ViewHo
         if (listener!=null){
             listener.onClick(v);
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                ArrayList<PreventaVO> filtrado=new ArrayList<>();
+                if (constraint==null || constraint.length()==0){
+                    filtrado.addAll(preventasTodos);
+                } else {
+                    String busqueda=constraint.toString().toLowerCase().trim();
+                    for (PreventaVO preventa:preventasTodos){
+                        if (preventa.getCliente().toLowerCase().contains(busqueda)){
+                            filtrado.add(preventa);
+                        }
+                    }
+                }
+
+                FilterResults filterResults=new FilterResults();
+                filterResults.values=filtrado;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                preventas.clear();
+                preventas.addAll((List)results.values);
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolderPreventa extends RecyclerView.ViewHolder {

@@ -1,5 +1,6 @@
 package com.example.aranjuez.interfaz;
 
+import com.example.aranjuez.entidades.Area;
 import com.example.aranjuez.entidades.Cliente;
 import com.example.aranjuez.entidades.Codigo_De_Barras;
 import com.example.aranjuez.entidades.Detalle_De_Grupo_De_Unidad_De_Medida;
@@ -14,9 +15,13 @@ import com.example.aranjuez.entidades.Unidad_De_Medida;
 import com.example.aranjuez.entidades.Unidad_De_Medida_De_Producto;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface AranjuezJsonApi {
@@ -55,4 +60,8 @@ public interface AranjuezJsonApi {
 
     @GET("todo.php")
     Call<List<Detalle_De_Preventa>> getDetalle_De_Preventa(@Query("Tabla") String Tabla);
+
+    @FormUrlEncoded
+    @POST("txt.php")
+    Call<Area> postArea(@FieldMap Map<String, String> map);
 }

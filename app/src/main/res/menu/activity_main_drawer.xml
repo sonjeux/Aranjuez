@@ -3,19 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="Opciones">
-        <menu>
-            <item
-                android:id="@+id/nav_Configuracion"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Configuracion"/>
-            <item
-                android:id="@+id/nav_Importar"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Descargar Todo"/>
-        </menu>
-    </item>
-
     <item android:title="Preventas">
         <menu>
             <item
@@ -29,11 +16,22 @@
         </menu>
     </item>
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-    </group>
+    <item android:title="Facturacion">
+        <menu>
+            <item
+                android:id="@+id/nav_Facturacion"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Facturacion" />
+        </menu>
+    </item>
+
+    <item android:title="Checklist">
+        <menu>
+            <item
+                android:id="@+id/nav_Checklist"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Checklist" />
+        </menu>
+    </item>
 
 </menu>

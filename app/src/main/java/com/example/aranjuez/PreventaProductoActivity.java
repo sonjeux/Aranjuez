@@ -116,7 +116,7 @@ public class PreventaProductoActivity extends AppCompatActivity implements Produ
     }
 
     @Override
-    public void aplicarTextos(String cantidad, String descuento) {
+    public void aplicarTextos(String cantidad) {
         Double PrecioF, CantidadF, DescuentoPorcentajeF, DescuentoF, LitrosF, LitrosTotalF, ICEF, ICETotalF, TotalF, TotalMenosICEF, PrecioUMenosICEF, IVAF;
         db=sqLiteHelper.getReadableDatabase();
 

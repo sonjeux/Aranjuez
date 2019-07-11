@@ -5,10 +5,12 @@
         android:id="@+id/botonNota"
         android:icon="@drawable/ic_speaker_notes_white_24dp"
         android:title="Nota"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        android:onClick="Nota"/>
     <item
         android:id="@+id/botonInformacion"
         android:icon="@drawable/ic_info_outline_white_24dp"
         android:title="Informacion"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        android:onClick="Info"/>
 </menu>

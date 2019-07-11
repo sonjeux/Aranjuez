@@ -87,4 +87,8 @@ public class ProductoListadoActivity extends AppCompatActivity {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void FiltrarPrecios(MenuItem item) {
+        Toast.makeText(getApplicationContext(), "Filtro", Toast.LENGTH_SHORT).show();
+    }
 }

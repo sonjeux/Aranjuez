@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import com.example.aranjuez.entidades.Producto;
 import com.example.aranjuez.interfaz.AranjuezJsonApi;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,8 +54,12 @@ public class MainActivity extends AppCompatActivity
 
         //Activar y desactivar opciones
         Menu menuNav=navigationView.getMenu();
-        MenuItem nav_camara = menuNav.findItem(R.id.nav_camera);
-        nav_camara.setEnabled(false);
+
+        MenuItem nav_Checklist=menuNav.findItem(R.id.nav_Checklist);
+        nav_Checklist.setEnabled(false);
+
+        MenuItem nav_Facturacion=menuNav.findItem(R.id.nav_Facturacion);
+        nav_Facturacion.setEnabled(false);
 
         SQLiteHelper sqLiteHelper=new SQLiteHelper(this, "aranjuez", null,1);
 
@@ -92,9 +98,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -105,21 +111,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Intent intent;
-        switch (item.getItemId()) {
-            case R.id.nav_Configuracion:
-                intent=new Intent(getApplicationContext(), configuracion.class);
-                startActivity(intent);
-                break;
-            case R.id.nav_Importar:
-                intent=new Intent(getApplicationContext(), JsonActivity.class);
-                startActivity(intent);
-                break;
-        }
 
-        if (id == R.id.nav_camera) {
-            intent=new Intent(getApplicationContext(), configuracion.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_Preventas) {
+        if (id == R.id.nav_Preventas) {
             intent=new Intent(getApplicationContext(), PreventaListadoActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_Productos) {
@@ -130,5 +123,15 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void configuracion(MenuItem item) {
+        Intent intent=new Intent(getApplicationContext(), configuracion.class);
+        startActivity(intent);
+    }
+
+    public void descargarTodo(MenuItem item) {
+        Intent intent=new Intent(getApplicationContext(), JsonActivity.class);
+        startActivity(intent);
     }
 }
