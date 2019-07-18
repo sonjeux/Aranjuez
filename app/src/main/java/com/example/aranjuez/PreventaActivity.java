@@ -28,11 +28,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class PreventaActivity extends AppCompatActivity {
+public class PreventaActivity extends AppCompatActivity implements PreventaNotaDialog.PreventaNotaDialogListener{
     ArrayList<Detalle_De_PreventaVO> detalle_de_preventas;
     RecyclerView recyclerView;
     SQLiteHelper sqLiteHelper;
-    String Id_Preventa, Id_Cliente, Id_Lista_De_Precios, CodigoPreventa, Fecha, Hora, Estado;
+    String Id_Preventa, Id_Cliente, Id_Lista_De_Precios, CodigoPreventa, Fecha, Hora, Nota, Estado;
     TextView Nit, CodigoSap, ClienteNombre, Total, EstadoT;
     SQLiteDatabase db;
     Double TotalTotal, TotalLitros, TotalSubtotal, TotalDescuento, TotalMontoCreditoFiscal, TotalIva, TotalIce, TotalTotalAPagar;
@@ -54,6 +54,8 @@ public class PreventaActivity extends AppCompatActivity {
 
         Id_Cliente = getIntent().getExtras().getString("idCliente");
         Id_Preventa = getIntent().getExtras().getString("idPreventa");
+
+        Nota="";
 
         sqLiteHelper=new SQLiteHelper(this, "aranjuez", null, 1);
 
@@ -106,6 +108,7 @@ public class PreventaActivity extends AppCompatActivity {
         Hora=simpleDateFormatHora.format(calendar.getTime());
 
         Estado="Pendiente";
+        Nota="";
 
         db=sqLiteHelper.getWritableDatabase();
         String SQLConsulta="INSERT INTO Preventa (Id, Id_Usuario, Id_Dispositivo, Id_Condicion_De_Pago, Id_Numeracion_De_Documento, Id_Preventista, Id_Cliente, Id_Preventa_Dispositivo, DocEntry, " +
@@ -165,7 +168,7 @@ public class PreventaActivity extends AppCompatActivity {
     private void PreventaEstado(){
         db=sqLiteHelper.getWritableDatabase();
         try {
-            db.execSQL("update Preventa set Estado='Finalizado' where _id='"+Id_Preventa+"'");
+            db.execSQL("update Preventa set Estado='Finalizado', Observaciones='"+Nota+"' where _id='"+Id_Preventa+"'");
             db.close();
             Estado="Finalizado";
             MostrarOcultar();
@@ -181,7 +184,7 @@ public class PreventaActivity extends AppCompatActivity {
             //fabAgregar.hide();
             fabAgregar.setEnabled(false);
             fabAgregar.setClickable(false);
-            fabAgregar.setAlpha(0.2f);
+            fabAgregar.setAlpha(0.0f);
             EstadoT.setText("Finalizado");
         } else {
             buttonFinalizar.setVisibility(View.VISIBLE);
@@ -254,7 +257,7 @@ public class PreventaActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Finalizar(View view) {
+    public void Finalizar2(View view) {
         AlertDialog alertDialog=new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Finalizar Preventa");
         alertDialog.setMessage("Desea finalizar esta preventa?");
@@ -273,9 +276,38 @@ public class PreventaActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void Nota(MenuItem item) {
+    public void Finalizar(View view) {
         PreventaNotaDialog preventaNotaDialog=new PreventaNotaDialog();
         preventaNotaDialog.show(getSupportFragmentManager(), "Nota");
+    }
+
+    public void Nota(MenuItem item) {
+        PreventaNotaDialogVer preventaNotaDialogVer=new PreventaNotaDialogVer();
+        Bundle bundle=new Bundle();
+        bundle.putString("Nota", "Esta es la nota");
+        preventaNotaDialogVer.setArguments(bundle);
+        preventaNotaDialogVer.show(getSupportFragmentManager(), "Ver");
+    }
+
+    @Override
+    public void notaTexto(String nota) {
+        Nota=nota;
+        AlertDialog alertDialog=new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Finalizar Preventa");
+        alertDialog.setMessage("Desea finalizar esta preventa?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                PreventaEstado();
+            }
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialog.show();
     }
 
     public void Info(MenuItem item) {

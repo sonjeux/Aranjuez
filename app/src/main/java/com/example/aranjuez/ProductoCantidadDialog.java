@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class ProductoCantidadDialog extends AppCompatDialogFragment{
-    private EditText editTextCantidad, editTextDescuento;
+    private EditText editTextCantidad;
     private ProductoCantidadDialogListener listener;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
