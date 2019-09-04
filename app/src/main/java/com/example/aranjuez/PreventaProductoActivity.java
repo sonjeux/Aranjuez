@@ -37,6 +37,7 @@ public class PreventaProductoActivity extends AppCompatActivity implements Produ
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Id_Preventa = getIntent().getExtras().getString("idPreventa");
+
         Id_Lista_De_Precios = getIntent().getExtras().getString("idListaPrecios");
 
         sqLiteHelper=new SQLiteHelper(this, "aranjuez", null,1);

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,13 +46,15 @@ public class PreventaListadoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Id_Preventa=preventas.get(recyclerView.getChildAdapterPosition(v)).getId();
                 db=sqLiteHelper.getReadableDatabase();
-                Cursor cursor=db.rawQuery("select * from Preventa where _id='"+Id_Preventa+"'", null);
+                //Cursor cursor=db.rawQuery("select * from Preventa where _id='"+Id_Preventa+"'", null);
+                Cursor cursor=db.rawQuery("select * from Preventa where Id='"+Id_Preventa+"'", null);
                 cursor.moveToFirst();
                 Id_Cliente=cursor.getString(cursor.getColumnIndex("Id_Cliente"));
 
                 Intent intent=new Intent(getApplicationContext(), PreventaActivity.class);
                 intent.putExtra("idCliente", Id_Cliente);
                 intent.putExtra("idPreventa", Id_Preventa);
+
                 startActivity(intent);
             }
         });
@@ -94,8 +97,9 @@ public class PreventaListadoActivity extends AppCompatActivity {
             Cursor cursor=db.rawQuery("select Preventa.*, (select Cliente.Nombre from Cliente where Cliente.Id=Preventa.Id_Cliente) as ClienteNombte from Preventa order by _id desc", null);
             cursor.moveToFirst();
             while(!cursor.isAfterLast()){
-                preventas.add(new PreventaVO(cursor.getString(cursor.getColumnIndex("_id")), cursor.getString(cursor.getColumnIndex("Fecha")), cursor.getString(cursor.getColumnIndex("Hora")),
-                        cursor.getString(cursor.getColumnIndex("ClienteNombte")), cursor.getString(cursor.getColumnIndex("Total")), cursor.getString(cursor.getColumnIndex("Estado"))));
+                preventas.add(new PreventaVO(cursor.getString(cursor.getColumnIndex("Id")), cursor.getString(cursor.getColumnIndex("Fecha")), cursor.getString(cursor.getColumnIndex("Hora")),
+                        cursor.getString(cursor.getColumnIndex("ClienteNombte")), cursor.getString(cursor.getColumnIndex("Total")), cursor.getString(cursor.getColumnIndex("Estado"))+" "+cursor.getString(cursor.getColumnIndex("Sincronizada"))));
+                Log.d("Total", cursor.getString(cursor.getColumnIndex("Total")));
                 cursor.moveToNext();
             }
             db.close();

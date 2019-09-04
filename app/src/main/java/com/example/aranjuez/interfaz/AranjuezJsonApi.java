@@ -11,6 +11,7 @@ import com.example.aranjuez.entidades.Lista_De_Precios;
 import com.example.aranjuez.entidades.Precio_De_Producto;
 import com.example.aranjuez.entidades.Preventa;
 import com.example.aranjuez.entidades.Producto;
+import com.example.aranjuez.entidades.Respuesta;
 import com.example.aranjuez.entidades.Unidad_De_Medida;
 import com.example.aranjuez.entidades.Unidad_De_Medida_De_Producto;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -64,4 +66,7 @@ public interface AranjuezJsonApi {
     @FormUrlEncoded
     @POST("txt.php")
     Call<Area> postArea(@FieldMap Map<String, String> map);
+
+    @POST("preventa_nuevo.php")
+    Call<Respuesta> getJsonRespuesta(@Body String body);
 }

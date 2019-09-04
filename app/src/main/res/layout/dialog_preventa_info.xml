@@ -42,7 +42,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textVPrecioU"
+        android:layout_below="@+id/textVDescuento"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="2dp"
@@ -55,26 +55,10 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textVPrecioU2"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Total a Pagar"
-        android:textColor="#ccc"
-        android:textSize="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textVCodigoSap"
+        android:layout_below="@+id/textVSubTotal"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="16dp"
@@ -83,14 +67,14 @@
         android:text="Monto para C.F."
         android:textColor="#ccc"
         android:textSize="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/textVCodigoSap"
+        app:layout_constraintTop_toBottomOf="@+id/textVSubTotal"
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textVProductoNombreD"
+        android:layout_below="@+id/textVMontoCreditoFiscal"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="16dp"
@@ -99,11 +83,11 @@
         android:text="Total"
         android:textColor="#ccc"
         android:textSize="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/textVCodigoSap"
+        app:layout_constraintTop_toBottomOf="@+id/textVSubTotal"
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/textVCodigoSap"
+        android:id="@+id/textVSubTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView4"
@@ -117,7 +101,7 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/textVProductoNombreD"
+        android:id="@+id/textVMontoCreditoFiscal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView7"
@@ -131,7 +115,7 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/textVTotalInfo"
+        android:id="@+id/textVTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView11"
@@ -145,7 +129,7 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/textVPrecioU"
+        android:id="@+id/textVDescuento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView5"
@@ -159,7 +143,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/textVPrecioU2"
+        android:id="@+id/textVICE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView8"
@@ -173,7 +157,23 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/textVTotalAPagarInfo"
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textVICE"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Total a Pagar"
+        android:textColor="#ccc"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/textVTotalAPagar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView12"
