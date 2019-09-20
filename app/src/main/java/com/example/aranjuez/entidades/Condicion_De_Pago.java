@@ -1,6 +1,8 @@
 package com.example.aranjuez.entidades;
 
-public class Condicion_De_Pago {
+import java.io.Serializable;
+
+public class Condicion_De_Pago implements Serializable {
     private String Id;
     private String GroupNum;
     private String Condicion;

@@ -149,6 +149,12 @@ public class consultasSQLite {
             "Apellido_Materno TEXT, Nombre_De_Usuario TEXT, Clave TEXT, Cambio_De_Clave TEXT, Usuario_SAP TEXT, Clave_SAP TEXT, Estado TEXT)";
 
     public static final String SQLZona="CREATE TABLE Zona (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id INTEGER, Codigo TEXT, Nombre TEXT, Estado TEXT)";
+
+    public static final String SQLVisita="CREATE TABLE Visita ( _id INTEGER PRIMARY KEY AUTOINCREMENT, Id TEXT, Id_Usuario INTEGER, Id_Dispositivo INTEGER, Id_Tema_De_Visita INTEGER, " +
+            "Id_Desarrollador INTEGER, Id_Preventista INTEGER, Id_Distribuidor INTEGER, Id_Cliente INTEGER, Id_Checklist INTEGER, Id_Preventa TEXT, Id_Factura TEXT, " +
+            "Id_Visita_Dispositivo INTEGER, Cliente TEXT, Fecha DATE, Hora TEXT, Observaciones TEXT, Estado TEXT)";
+
+    public static final String SQLTema_De_Visita="CREATE TABLE Tema_De_Visita (_id INTEGER PRIMARY KEY AUTOINCREMENT, Id, Descripcion, Estado)";
 }
 
 

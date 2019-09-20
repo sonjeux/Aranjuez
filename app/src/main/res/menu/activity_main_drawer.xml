@@ -15,6 +15,14 @@
                 android:title="Productos" />
         </menu>
     </item>
+    <item android:title="Visitas">
+        <menu>
+            <item
+                android:id="@+id/nav_Visitas"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Visitas" />
+        </menu>
+    </item>
 
     <item android:title="Facturacion">
         <menu>

@@ -3,6 +3,7 @@ package com.example.aranjuez.interfaz;
 import com.example.aranjuez.entidades.Area;
 import com.example.aranjuez.entidades.Cliente;
 import com.example.aranjuez.entidades.Codigo_De_Barras;
+import com.example.aranjuez.entidades.Condicion_De_Pago;
 import com.example.aranjuez.entidades.Detalle_De_Grupo_De_Unidad_De_Medida;
 import com.example.aranjuez.entidades.Detalle_De_Preventa;
 import com.example.aranjuez.entidades.Dias_De_Visita;
@@ -12,6 +13,7 @@ import com.example.aranjuez.entidades.Precio_De_Producto;
 import com.example.aranjuez.entidades.Preventa;
 import com.example.aranjuez.entidades.Producto;
 import com.example.aranjuez.entidades.Respuesta;
+import com.example.aranjuez.entidades.Tema_De_Visita;
 import com.example.aranjuez.entidades.Unidad_De_Medida;
 import com.example.aranjuez.entidades.Unidad_De_Medida_De_Producto;
 
@@ -69,4 +71,10 @@ public interface AranjuezJsonApi {
 
     @POST("preventa_nuevo.php")
     Call<Respuesta> getJsonRespuesta(@Body String body);
+
+    @POST("todo.php")
+    Call<List<Condicion_De_Pago>> getCondicion_De_Pago(@Query("Tabla") String Tabla);
+
+    @POST("todo.php")
+    Call<List<Tema_De_Visita>> getTema_De_Visita(@Query("Tabla") String Tabla);
 }

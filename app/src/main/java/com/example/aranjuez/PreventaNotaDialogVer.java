@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class PreventaNotaDialogVer extends AppCompatDialogFragment {
-    TextView textNotaVer;
+    TextView textNotaVer, textCondicion;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -19,10 +19,10 @@ public class PreventaNotaDialogVer extends AppCompatDialogFragment {
         View view=inflater.inflate(R.layout.dialog_preventa_nota_ver, null);
 
         textNotaVer=view.findViewById(R.id.textNotaVer);
+        textCondicion=view.findViewById(R.id.textCondicion);
         Bundle bundle=getArguments();
-        String Nota;
-        Nota=bundle.getString("Nota", "");
-        textNotaVer.setText(Nota);
+        textNotaVer.setText(bundle.getString("Nota", ""));
+        textCondicion.setText(bundle.getString("Condicion", ""));
 
         builder.setView(view).setTitle("Nota").setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
             @Override

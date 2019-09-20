@@ -17,12 +17,14 @@ import android.widget.Toast;
 import com.example.aranjuez.entidades.Area;
 import com.example.aranjuez.entidades.Cliente;
 import com.example.aranjuez.entidades.Codigo_De_Barras;
+import com.example.aranjuez.entidades.Condicion_De_Pago;
 import com.example.aranjuez.entidades.Detalle_De_Grupo_De_Unidad_De_Medida;
 import com.example.aranjuez.entidades.Dias_De_Visita;
 import com.example.aranjuez.entidades.Grupo_De_Unidad_De_Medida;
 import com.example.aranjuez.entidades.Lista_De_Precios;
 import com.example.aranjuez.entidades.Precio_De_Producto;
 import com.example.aranjuez.entidades.Producto;
+import com.example.aranjuez.entidades.Tema_De_Visita;
 import com.example.aranjuez.entidades.Unidad_De_Medida;
 import com.example.aranjuez.entidades.Unidad_De_Medida_De_Producto;
 import com.example.aranjuez.interfaz.AranjuezJsonApi;
@@ -414,6 +416,37 @@ public class JsonActivity extends AppCompatActivity {
         }
     }
 
+    public void Condicion_De_PagoSincronizar(){
+        Call<List<Condicion_De_Pago>> call=aranjuezJsonApi.getCondicion_De_Pago("Condicion_De_Pago");
+        try {
+            SQLiteDatabase db=sqLiteHelper.getWritableDatabase();
+            db.execSQL("DELETE FROM Condicion_De_Pago");
+            List<Condicion_De_Pago> condicion_de_pagos=call.execute().body();
+            for (Condicion_De_Pago condicion_de_pago:condicion_de_pagos){
+                String SQLConsulta="INSERT INTO Condicion_De_Pago (Id, GroupNum, Condicion, Meses_Extra, Dias_Extra, Estado) VALUES ('"+condicion_de_pago.getId()+"', '"+condicion_de_pago.getGroupNum()+
+                        "', '"+condicion_de_pago.getCondicion()+"', '"+condicion_de_pago.getMeses_Extra()+"', '"+condicion_de_pago.getDias_Extra()+"', '"+condicion_de_pago.getEstado()+"')";
+                db.execSQL(SQLConsulta);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Tema_De_VisitaSincronizar(){
+        Call<List<Tema_De_Visita>> call=aranjuezJsonApi.getTema_De_Visita("Tema_De_Visita");
+        try {
+            SQLiteDatabase db=sqLiteHelper.getWritableDatabase();
+            db.execSQL("DELETE FROM Condicion_De_Pago");
+            List<Tema_De_Visita> tema_de_visitas=call.execute().body();
+            for (Tema_De_Visita tema_de_visita:tema_de_visitas) {
+                String SQLConsulta="INSERT INTO Tema_De_Visita (Id, Descripcion, Estado) VALUES ('"+tema_de_visita.getId()+"', '"+tema_de_visita.getDescripcion()+"', '"+tema_de_visita.getEstado()+"')";
+                db.execSQL(SQLConsulta);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Id, Id_Actividad_Economica, Id_Producto, Id_Unidad_De_Medida, Tipo, Estado
 
     public void sincronizar(View view) {
@@ -492,6 +525,10 @@ public class JsonActivity extends AppCompatActivity {
             Unidad_De_MedidaSincronizar();
             publishProgress(10);
             Unidad_De_Medida_De_ProductoSincronizar();
+            publishProgress(11);
+            Condicion_De_PagoSincronizar();
+            publishProgress(12);
+            Tema_De_VisitaSincronizar();
             return null;
         }
 
@@ -521,22 +558,22 @@ public class JsonActivity extends AppCompatActivity {
                     progressDialog.setMessage("Tabla Codigo_De_Barras");
                     break;
                 case 7:
-                    progressDialog.setMessage("Tabla Dias_De_Visita");
-                    break;
-                case 8:
-                    progressDialog.setMessage("Tabla Detalle_De_Grupo_De_Unidad_De_Medida");
-                    break;
-                case 9:
-                    progressDialog.setMessage("Tabla Unidad_De_Medida");
-                    break;
-                case 10:
-                    progressDialog.setMessage("Tabla Unidad_De_Medida_De_Producto");
-                    break;
-                case 11:
                     progressDialog.setMessage("Tabla Dias de Visita");
                     break;
+                case 8:
+                    progressDialog.setMessage("Tabla Detalle de Grupo de Unidad de Medida");
+                    break;
+                case 9:
+                    progressDialog.setMessage("Tabla Unidad de Medida");
+                    break;
+                case 10:
+                    progressDialog.setMessage("Tabla Unidad de Medida de Producto");
+                    break;
+                case 11:
+                    progressDialog.setMessage("Tabla Condicion de Pago");
+                    break;
                 case 12:
-                    progressDialog.setMessage("Tabla Ubicacion");
+                    progressDialog.setMessage("Tabla Tema de Visita");
                     break;
                 case 13:
                     progressDialog.setMessage("Tabla Usuario");

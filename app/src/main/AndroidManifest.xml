@@ -11,10 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".VisitaActivity"
+            ></activity>
+        <activity android:name=".VisitaListadoActivity"
+            android:label="Visitas"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PreventaProductoActivity"
-            android:label="Productos"
-            />
+            android:label="Productos" />
         <activity
             android:name=".PreventaActivity"
             android:label="Preventa"

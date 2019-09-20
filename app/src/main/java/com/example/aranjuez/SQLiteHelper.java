@@ -26,6 +26,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(consultasSQLite.SQLUnidad_De_Medida_De_Producto); //
         db.execSQL(consultasSQLite.SQLPreventa);
         db.execSQL(consultasSQLite.SQLDetalle_De_Preventa);
+        db.execSQL(consultasSQLite.SQLCondicion_De_Pago);
+        db.execSQL(consultasSQLite.SQLVisita);
+        db.execSQL(consultasSQLite.SQLTema_De_Visita);
     }
 
     @Override
@@ -42,6 +45,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Unidad_De_Medida_De_Producto");
         db.execSQL("DROP TABLE IF EXISTS Preventa");
         db.execSQL("DROP TABLE IF EXISTS Detalle_De_Preventa");
+        db.execSQL("DROP TABLE IF EXISTS Condicion_De_Pago");
+        db.execSQL("DROP TABLE IF EXISTS Visita");
+        db.execSQL("DROP TABLE IF EXISTS Tema_De_Visita");
         onCreate(db);
     }
 }

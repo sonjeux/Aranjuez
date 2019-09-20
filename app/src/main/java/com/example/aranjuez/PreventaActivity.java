@@ -48,7 +48,7 @@ public class PreventaActivity extends AppCompatActivity implements PreventaNotaD
     ArrayList<Detalle_De_PreventaVO> detalle_de_preventas;
     RecyclerView recyclerView;
     SQLiteHelper sqLiteHelper;
-    String Id_Usuario, Id_Dispositivo, Id_Preventa, Id_Cliente, Id_Lista_De_Precios, Id_Condicion_De_Pago, Id_Preventista, CodigoPreventa, Fecha, Hora, Nota, Estado;
+    String Id_Usuario, Id_Dispositivo, Id_Preventa, Id_Cliente, Id_Lista_De_Precios, Id_Condicion_De_Pago, Id_Preventista, CodigoPreventa, Fecha, Hora, Nota, Estado, idCondicion, Condicion;
     TextView Nit, CodigoSap, ClienteNombre, Total, EstadoT;
     SQLiteDatabase db;
     Double TotalTotal, TotalLitros, TotalSubtotal, TotalDescuento, TotalMontoCreditoFiscal, TotalIva, TotalIce, TotalTotalAPagar;
@@ -72,6 +72,7 @@ public class PreventaActivity extends AppCompatActivity implements PreventaNotaD
         Id_Preventa = getIntent().getExtras().getString("idPreventa");
 
         Nota="";
+        idCondicion="";
 
         sqLiteHelper=new SQLiteHelper(this, "aranjuez", null, 1);
 
@@ -111,6 +112,12 @@ public class PreventaActivity extends AppCompatActivity implements PreventaNotaD
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.menu_preventa, menu);
+        MenuItem notaMenu=menu.findItem(R.id.botonNota);
+        if (Estado.equals("Finalizado")){
+            notaMenu.setVisible(true);
+        } else {
+            notaMenu.setVisible(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -132,12 +139,13 @@ public class PreventaActivity extends AppCompatActivity implements PreventaNotaD
 
         Estado="Pendiente";
         Nota="";
+        idCondicion="";
 
         db=sqLiteHelper.getWritableDatabase();
         String SQLConsulta="INSERT INTO Preventa (Id, Id_Usuario, Id_Dispositivo, Id_Condicion_De_Pago, Id_Numeracion_De_Documento, Id_Preventista, Id_Cliente, Id_Preventa_Dispositivo, DocEntry, " +
                 "Codigo_SAP, Fecha, Hora, Latitud, Longitud, Total_De_Litros, Subtotal, Descuento, Monto_Para_Credito_Fiscal, IVA, ICE, Total, Total_A_Pagar, Observaciones, Estado, Sincronizada) " +
                 "VALUES ('"+CodigoPreventa+"', '"+Id_Usuario+"', '"+Id_Dispositivo+"', '1', NULL, '6', '"+Id_Cliente+"', '1', '', " +
-                "'Codigo_SAP', '"+Fecha+"', '"+Hora+"', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', 'Observaciones', '"+Estado+"', '0')";
+                "'Codigo_SAP', '"+Fecha+"', '"+Hora+"', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '"+Estado+"', '0')";
         db.execSQL(SQLConsulta);
 
         /*Cursor cursor=db.rawQuery("select MAX(_id) from Preventa", null);
@@ -177,10 +185,11 @@ public class PreventaActivity extends AppCompatActivity implements PreventaNotaD
     private void PreventaCargar(){
         db=sqLiteHelper.getReadableDatabase();
         try {
-            Cursor cursor = db.rawQuery("select * from Preventa where Id='"+Id_Preventa+"'", null);
+            Cursor cursor = db.rawQuery("select (select Condicion_De_Pago.Condicion from Condicion_De_Pago where Condicion_De_Pago.Id=Preventa.Id_Condicion_De_Pago) as Condicion, Preventa.* from Preventa where Id='"+Id_Preventa+"'", null);
             cursor.moveToFirst();
             Nota=cursor.getString(cursor.getColumnIndex("Observaciones"));
             Estado=cursor.getString(cursor.getColumnIndex("Estado"));
+            Condicion=cursor.getString(cursor.getColumnIndex("Condicion"));
 
             db.close();
             cursor.close();
@@ -192,7 +201,7 @@ public class PreventaActivity extends AppCompatActivity implements PreventaNotaD
     private void PreventaEstado(){
         db=sqLiteHelper.getWritableDatabase();
         try {
-            db.execSQL("update Preventa set Estado='Finalizado', Observaciones='"+Nota+"' where Id='"+Id_Preventa+"'");
+            db.execSQL("update Preventa set Estado='Finalizado', Id_Condicion_De_Pago='"+idCondicion+"', Observaciones='"+Nota+"' where Id='"+Id_Preventa+"'");
             db.close();
             Estado="Finalizado";
             MostrarOcultar();
@@ -320,11 +329,12 @@ public class PreventaActivity extends AppCompatActivity implements PreventaNotaD
 
     public void Nota(MenuItem item) {
         PreventaCargar();
-        preventaJson();
+        //preventaJson();
 
         PreventaNotaDialogVer preventaNotaDialogVer=new PreventaNotaDialogVer();
         Bundle bundle=new Bundle();
         bundle.putString("Nota", Nota);
+        bundle.putString("Condicion", Condicion);
         preventaNotaDialogVer.setArguments(bundle);
         preventaNotaDialogVer.show(getSupportFragmentManager(), "Ver");
     }
@@ -496,8 +506,9 @@ public class PreventaActivity extends AppCompatActivity implements PreventaNotaD
     }
 
     @Override
-    public void notaTexto(String nota) {
+    public void notaTexto(String nota, String IdCondicion) {
         Nota=nota;
+        idCondicion=IdCondicion;
         AlertDialog alertDialog=new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Finalizar Preventa");
         alertDialog.setMessage("Desea finalizar esta preventa?");
