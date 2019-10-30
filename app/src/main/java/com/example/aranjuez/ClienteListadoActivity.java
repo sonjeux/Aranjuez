@@ -1,8 +1,11 @@
 package com.example.aranjuez;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Path;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,11 +28,15 @@ public class ClienteListadoActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SQLiteHelper sqLiteHelper;
     ClienteAdapter clienteAdapter;
+    String Opcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente_listado);
+
+        SharedPreferences sharedPreferences=getSharedPreferences("Opciones", Context.MODE_PRIVATE);
+        Opcion=sharedPreferences.getString("Opcion", "No mames");
 
         sqLiteHelper=new SQLiteHelper(this, "aranjuez", null, 1);
 
@@ -45,10 +52,23 @@ public class ClienteListadoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String Id_Cliente=clientes.get(recyclerView.getChildAdapterPosition(v)).getId();
-                Intent intent=new Intent(getApplicationContext(), PreventaActivity.class);
-                intent.putExtra("idCliente", Id_Cliente);
-                intent.putExtra("idPreventa", "0");
-                startActivity(intent);
+                if (Opcion.equals("Preventa")){
+                    Intent intent=new Intent(getApplicationContext(), PreventaActivity.class);
+                    intent.putExtra("idCliente", Id_Cliente);
+                    intent.putExtra("idPreventa", "0");
+                    startActivity(intent);
+                } else {
+                    SharedPreferences sharedPreferences=getSharedPreferences("Visita", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("idCliente", Id_Cliente);
+                    editor.putString("idVisita", "0");
+                    editor.commit();
+
+                    Intent intent=new Intent(getApplicationContext(), VisitaActivity.class);
+                    startActivity(intent);
+
+                    //Toast.makeText(getApplicationContext(), "Todavia No esta", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

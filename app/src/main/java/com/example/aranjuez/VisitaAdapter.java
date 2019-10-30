@@ -5,19 +5,34 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.aranjuez.entidades.VisitaVO;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolderVisitas> {
+public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolderVisitas> implements View.OnClickListener, Filterable {
     ArrayList<VisitaVO> visitas;
+    ArrayList<VisitaVO> visitasTodos;
+
+    private View.OnClickListener listener;
+
+    public VisitaAdapter(ArrayList<VisitaVO> visitas){
+        this.visitas=visitas;
+    }
+
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
 
     @NonNull
     @Override
     public ViewHolderVisitas onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_visitas, null, false);
+        view.setOnClickListener(this);
         return new ViewHolderVisitas(view);
     }
 
@@ -33,6 +48,36 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return visitas.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (listener!=null) {
+            listener.onClick(v);
+        }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                ArrayList<VisitaVO> filtrado=new ArrayList<>();
+                if (constraint==null || constraint.length()==0){
+                    filtrado.addAll(visitasTodos);
+                } else {
+                    String busqueda=constraint.toString().toLowerCase().trim();
+                }
+                return null;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                visitas.clear();
+                visitas.addAll((List)results.values);
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolderVisitas extends RecyclerView.ViewHolder {

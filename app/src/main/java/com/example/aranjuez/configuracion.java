@@ -33,13 +33,15 @@ public class configuracion extends AppCompatActivity {
         String Dispositivo=eDispositivo.getText().toString();
         String Url=eUrl.getText().toString();
 
-        //Id_Usuario, Id_Dispositivo,
-
         SharedPreferences.Editor editor=preferences.edit();
         editor.putString("Dispositivo", Dispositivo);
         editor.putString("Url", Url);
         editor.putString("Id_Usuario", "1");
         editor.putString("Id_Dispositivo", "1");
+        editor.putString("Id_Desarrollador", "1");
+        editor.putString("Id_Preventista", "1");
+        editor.putString("Id_Distribuidor", "1");
+        editor.putString("Id_Visita_Dispositivo", "1");
         editor.commit();
 
         Toast.makeText(getApplicationContext(), "Datos Guardados", Toast.LENGTH_SHORT).show();

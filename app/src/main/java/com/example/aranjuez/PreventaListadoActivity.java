@@ -1,6 +1,8 @@
 package com.example.aranjuez;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -110,6 +112,11 @@ public class PreventaListadoActivity extends AppCompatActivity {
     }
 
     public void BuscarCliente(View view) {
+        SharedPreferences sharedPreferences=getSharedPreferences("Opciones", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("Opcion", "Preventa");
+        editor.commit();
+
         Intent intent=new Intent(getApplicationContext(), ClienteListadoActivity.class);
         startActivity(intent);
     }

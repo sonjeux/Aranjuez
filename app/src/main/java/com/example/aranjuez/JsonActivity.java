@@ -549,13 +549,13 @@ public class JsonActivity extends AppCompatActivity {
                     progressDialog.setMessage("Tabla Lista de Precios");
                     break;
                 case 4:
-                    progressDialog.setMessage("Tabla Grupo_De_Unidad_De_Medida");
+                    progressDialog.setMessage("Tabla Grupo de Unidad de Medida");
                     break;
                 case 5:
-                    progressDialog.setMessage("Tabla Precio_De_Producto");
+                    progressDialog.setMessage("Tabla Precio de Producto");
                     break;
                 case 6:
-                    progressDialog.setMessage("Tabla Codigo_De_Barras");
+                    progressDialog.setMessage("Tabla Codigo de Barras");
                     break;
                 case 7:
                     progressDialog.setMessage("Tabla Dias de Visita");
